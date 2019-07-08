@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">spotify-challenge</string>
+    <string name="scheme">https</string>
+    <string name="host">mydigipay.com</string>
+</resources>
