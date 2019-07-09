@@ -2,6 +2,7 @@
     <string name="app_name">spotify-challenge</string>
     <string name="scheme">http</string>
     <string name="host">mydigipay.com/</string>
-    <string name="err_authentication">A occur error in Authentication</string>
+    <string name="error_message">A occur error</string>
     <string name="login">Login</string>
+    <string name="connection_failure">Your Connection is Lost Please check your device Internet</string>
 </resources>
