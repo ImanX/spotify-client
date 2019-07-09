@@ -6,11 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.github.imanx.spotify.R
+import com.github.imanx.spotify.*
 import com.github.imanx.spotify.databinding.ActivitySearchBinding
-import com.github.imanx.spotify.makeToast
 import com.github.imanx.spotify.models.Artist
-import com.github.imanx.spotify.setContentViewByBinding
 import com.github.imanx.spotify.view.ArtistAdapter
 import com.github.imanx.spotify.view.OnClickRecyclerViewItemListener
 import com.github.imanx.spotify.view.bottomSheet.ArtistDetailsBottomSheet
@@ -42,24 +40,28 @@ class SearchActivity : AppCompatActivity() {
     private val onQuerySearchView = object : SearchView.OnQueryTextListener {
         override fun onQueryTextSubmit(query: String?): Boolean {
             searchVieModel.query(query)
-            searchVieModel.getSearchArtistLiveData()?.observe(this@SearchActivity, searchObserver);
-            return false;
+            searchVieModel.getSearchArtistLiveData()?.observe(this@SearchActivity, searchObserver)
+            progress_circular.toShow()
+            return false
         }
 
         override fun onQueryTextChange(newText: String?): Boolean {
-            return false;
+            return false
         }
 
     }
 
     private val onClickRecyclerViewItemListener = object : OnClickRecyclerViewItemListener<Artist> {
         override fun onClick(v: View?, item: Artist) {
-            ArtistDetailsBottomSheet.newInstance(item).show(supportFragmentManager);
+            ArtistDetailsBottomSheet
+                .newInstance(item)
+                .show(supportFragmentManager)
         }
     }
 
 
     private val exceptionObserver = Observer<Exception> {
+        progress_circular.toHide()
         if (it == null) {
             makeToast(getString(R.string.connection_failure))
             return@Observer
@@ -71,6 +73,7 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private val searchObserver = Observer<List<Artist>> {
+        progress_circular.toHide()
         val adapter = ArtistAdapter(it);
         adapter.onClickRecyclerViewItemListener = onClickRecyclerViewItemListener;
         recycler_view.adapter = adapter;

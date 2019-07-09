@@ -39,4 +39,13 @@ fun <T : ViewDataBinding> AppCompatActivity.setContentViewByBinding(@LayoutRes l
     return DataBindingUtil.setContentView(this, layout);
 }
 
+fun View.toHide() {
+    this.visibility = View.INVISIBLE;
+}
+
+fun View.toShow() {
+    this.visibility = View.VISIBLE;
+
+}
+
 inline fun <reified T> Gson.fromJson(json: String): T = this.fromJson<T>(json, object : TypeToken<T>() {}.type)
