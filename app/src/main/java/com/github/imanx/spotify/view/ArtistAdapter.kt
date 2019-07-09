@@ -1,6 +1,5 @@
 package com.github.imanx.spotify.view
 
-import android.annotation.SuppressLint
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil

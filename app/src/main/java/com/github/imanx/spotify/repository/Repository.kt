@@ -33,9 +33,13 @@ abstract class Repository<T : Any>(private val call: Call) : Deserialize<T> {
             }
 
             override fun onResponse(call: Call, response: Response) {
-                response.takeIf { it.isSuccessful }?.apply {
-                    val result = onDeserialize(body?.string()!!, GsonBuilder().create())
-                    liveData.postValue(result);
+
+                if (response.isSuccessful) {
+                    val body = response.body?.string()
+                    val result = onDeserialize(body!!, GsonBuilder().create())
+                    onSuccess(result)
+                } else {
+                    onFailure(response.code, response.body?.string()!!)
                 }
             }
 

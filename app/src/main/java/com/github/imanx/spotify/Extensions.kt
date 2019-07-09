@@ -27,10 +27,11 @@ fun Activity.makeToast(message: String, duration: Int = Toast.LENGTH_SHORT) {
 
 fun Activity.startActivity(clazz: Class<*>) = startActivity(Intent(this, clazz));
 
-fun ImageView.load(url: String) {
+fun ImageView.load(url: String, sizeWidth: Int = 100, sizeHeight: Int = 100) {
     Picasso.get()
         .load(Uri.parse(url))
-        .resize(100, 100)
+        .resize(sizeWidth, sizeHeight)
+        .placeholder(android.R.drawable.ic_menu_report_image)
         .into(this);
 }
 

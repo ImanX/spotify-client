@@ -1,9 +1,9 @@
 package com.github.imanx.spotify.view.activities
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.github.imanx.spotify.getView
+import com.github.imanx.spotify.startActivity
 import com.github.imanx.spotify.utils.AuthenticationPreferences
 
 /**
@@ -14,7 +14,7 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val authenticationPreferences = AuthenticationPreferences(this);
+        val authenticationPreferences = AuthenticationPreferences(this)
         val activityClass = if (authenticationPreferences.hasToken()) {
             SearchActivity::class.java
         } else {
@@ -24,9 +24,9 @@ class SplashActivity : AppCompatActivity() {
 
 
         getView().postDelayed({
-            startActivity(Intent(this, activityClass));
-            finish();
-        }, (1 * 1000))
+            startActivity(activityClass);
+            finish()
+        }, (2 * 1000))
 
 
     }

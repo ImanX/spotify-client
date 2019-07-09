@@ -13,6 +13,7 @@ import com.github.imanx.spotify.models.Artist
 import com.github.imanx.spotify.setContentViewByBinding
 import com.github.imanx.spotify.view.ArtistAdapter
 import com.github.imanx.spotify.view.OnClickRecyclerViewItemListener
+import com.github.imanx.spotify.view.bottomSheet.ArtistDetailsBottomSheet
 import com.github.imanx.spotify.viewModel.SearchViewModel
 import kotlinx.android.synthetic.main.activity_search.*
 import java.lang.Exception
@@ -42,7 +43,7 @@ class SearchActivity : AppCompatActivity() {
         override fun onQueryTextSubmit(query: String?): Boolean {
             searchVieModel.query(query)
             searchVieModel.getSearchArtistLiveData()?.observe(this@SearchActivity, searchObserver);
-            return true;
+            return false;
         }
 
         override fun onQueryTextChange(newText: String?): Boolean {
@@ -53,7 +54,7 @@ class SearchActivity : AppCompatActivity() {
 
     private val onClickRecyclerViewItemListener = object : OnClickRecyclerViewItemListener<Artist> {
         override fun onClick(v: View?, item: Artist) {
-
+            ArtistDetailsBottomSheet.newInstance(item).show(supportFragmentManager);
         }
     }
 
