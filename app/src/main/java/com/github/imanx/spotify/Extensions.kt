@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import android.view.View
 import android.widget.Toast
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 /**
  * Created by ImanX.
@@ -16,3 +18,5 @@ fun Activity.makeToast(message: String, duration: Int = Toast.LENGTH_SHORT) {
 }
 
 fun Activity.startActivity(clazz: Class<*>) = startActivity(Intent(this, clazz));
+
+inline fun <reified T> Gson.fromJson(json: String) = this.fromJson<T>(json, object : TypeToken<T>() {}.type)

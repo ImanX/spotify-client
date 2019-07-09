@@ -17,7 +17,7 @@ class AuthenticationPreferences(context: Context) {
         editor.putString("TOKEN", token).commit();
     }
 
-    fun getToken(): String? = preferences.getString("TOKEN", null);
+    fun getToken(): String? = preferences.getString("TOKEN", null)
 
     fun hasToken(): Boolean = getToken() != null;
 }

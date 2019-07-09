@@ -1,10 +1,7 @@
 package com.github.imanx.spotify.utils
 
-import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Context
-import android.content.Intent
-import android.os.Bundle
+import com.github.imanx.spotify.BuildConfig
 import com.github.imanx.spotify.R
 import com.spotify.sdk.android.authentication.AuthenticationClient
 import com.spotify.sdk.android.authentication.AuthenticationRequest
@@ -14,16 +11,16 @@ import com.spotify.sdk.android.authentication.AuthenticationResponse
  * Created by ImanX.
  * spotifychallenge | Copyrights 2019 ZarinPal Crop.
  */
-@SuppressLint("Registered")
-class SpotifyAuthenticationHelper {
+class SpotifyAuthenticationHelper(private val hostActivity: Activity) {
 
     private val requestCode = 100;
+    private val callbackURL = "${hostActivity.getString(R.string.scheme)}://${hostActivity.getString(R.string.host)}"
+    private val scopes = arrayOf("app-remote-control");
 
-    fun startAuthentication(hostActivity: Activity) {
-        val callbackURL = "${hostActivity.getString(R.string.scheme)}://${hostActivity.getString(R.string.host)}"
-        val scopes = arrayOf("app-remote-control");
+    fun startAuthentication() {
+
         val spotifyRequest = AuthenticationRequest.Builder(
-            "ba05b9cd59634cefa8493ac961d76ed6"
+            BuildConfig.CLIENT_ID
             , AuthenticationResponse.Type.TOKEN
             , callbackURL
         )
